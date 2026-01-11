@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order | The Rajputana Darbar</title>
+  <style>
+    body { font-family:Arial; background:#fff8f0; }
+    form { max-width:400px; margin:auto; }
+    input, textarea, button {
+      width:100%;
+      padding:10px;
+      margin:10px 0;
+    }
+    button {
+      background:#8e2a2a;
+      color:white;
+      border:none;
+      font-size:16px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 style="text-align:center;color:#8e2a2a;">Place Your Order</h1>
+
+<form action="https://formsubmit.co/YOUR_EMAIL@gmail.com" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <textarea name="order" placeholder="Your Order Details" required></textarea>
+
+  <input type="hidden" name="_subject" value="New Order - The Rajputana Darbar">
+  <input type="hidden" name="_captcha" value="false">
+
+  <button type="submit">Submit Order</button>
+</form>
+
+<p style="text-align:center;"><a href="index.html">⬅ Back to Home</a></p>
+
+</body>
+</html>
