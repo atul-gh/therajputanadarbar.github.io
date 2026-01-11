@@ -1,3 +1,16 @@
+// Menu items with price & category
+const menuData = {
+  "Paneer Tikka": {price: 10, category: "Starter Veg"},
+  "Veg Spring Roll": {price: 8, category: "Starter Veg"},
+  "Chicken Tikka": {price: 12, category: "Starter Non-Veg"},
+  "Fish Amritsari": {price: 14, category: "Starter Non-Veg"},
+  "Dal Makhani": {price: 8, category: "Main Course Veg"},
+  "Paneer Butter Masala": {price: 12, category: "Main Course Veg"},
+  "Butter Chicken": {price: 12, category: "Main Course Non-Veg"},
+  "Mutton Rogan Josh": {price: 15, category: "Main Course Non-Veg"},
+  "Roti": {price: 2, category: "Main Course Veg"} // example
+};
+
 // Initialize cart from localStorage
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
@@ -37,27 +50,43 @@ function renderCart() {
   }
 
   let html = "";
+  let total = 0;
+
   for (let item in cart) {
+    const price = menuData[item]?.price || 0;
+    const category = menuData[item]?.category || "";
+    const itemTotal = price * cart[item];
+    total += itemTotal;
+
     html += `
       <div class="cart-item">
-        <span>${item}</span>
+        <span>${item} (${category}) - $${price}</span>
         <div>
           <button class="qty-btn" onclick="decrease('${item}')">−</button>
           <strong>${cart[item]}</strong>
           <button class="qty-btn" onclick="increase('${item}')">+</button>
         </div>
+        <span>=$${itemTotal}</span>
       </div>
     `;
   }
+
+  html += `<hr><h3>Total: $${total}</h3>`;
   container.innerHTML = html;
 }
 
-// Get order text for WhatsApp/Email
+// Get order text with total for WhatsApp/Email
 function orderText() {
   let text = "Order Details:\n";
+  let total = 0;
   for (let item in cart) {
-    text += `${item} x ${cart[item]}\n`;
+    const price = menuData[item]?.price || 0;
+    const category = menuData[item]?.category || "";
+    const itemTotal = price * cart[item];
+    total += itemTotal;
+    text += `${item} (${category}) x ${cart[item]} = $${itemTotal}\n`;
   }
+  text += `\nTotal: $${total}`;
   return text;
 }
 
