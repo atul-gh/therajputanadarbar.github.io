@@ -4,7 +4,7 @@
   <title>Order | The Rajputana Darbar</title>
   <style>
     body { font-family:Arial; background:#fff8f0; }
-    form { max-width:400px; margin:auto; }
+    form { max-width:420px; margin:auto; }
     input, textarea, button {
       width:100%;
       padding:10px;
@@ -15,6 +15,7 @@
       color:white;
       border:none;
       font-size:16px;
+      cursor:pointer;
     }
   </style>
 </head>
@@ -22,21 +23,23 @@
 
 <h1 style="text-align:center;color:#8e2a2a;">Place Your Order</h1>
 
-<form action="https://formsubmit.co/drajputanadarbar@gmail.com" method="POST">
+<form action="https://formsubmit.co/YOUR_EMAIL@gmail.com" method="POST">
 
-  <input type="text" name="name" placeholder="Your Name" required>
+  <!-- Static Subject -->
+  <input type="hidden" name="_subject" value="New Order | The Rajputana Darbar">
 
-  <input type="tel" name="phone" placeholder="Phone Number" required>
-
-  <!-- Order Name -->
-  <input type="text" name="order_name" placeholder="Order Name (e.g. Butter Chicken Combo)" required>
-
-  <textarea name="order_details" placeholder="Order Details (Quantity, spice level, notes)" required></textarea>
-
-  <!-- Dynamic Subject Line -->
-  <input type="hidden" name="_subject" value="New Order – %order_name% | The Rajputana Darbar">
-
+  <!-- Better email formatting -->
+  <input type="hidden" name="_template" value="table">
   <input type="hidden" name="_captcha" value="false">
+
+  <input type="text" name="Customer Name" placeholder="Your Name" required>
+
+  <input type="tel" name="Phone Number" placeholder="Phone Number" required>
+
+  <!-- Order Name (appears clearly in email body) -->
+  <input type="text" name="ORDER NAME ⭐" placeholder="Order Name (e.g. Butter Chicken Combo)" required>
+
+  <textarea name="Order Details" placeholder="Quantity, spice level, special notes" required></textarea>
 
   <button type="submit">Submit Order</button>
 
