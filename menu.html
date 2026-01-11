@@ -1,21 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The Rajputana Darbar | Menu</title>
+  <title>Menu | The Rajputana Darbar</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
-<body style="font-family:Arial; background:#fff8f0;">
+<body>
 
-<h1 style="color:#c0392b; text-align:center;">Our Menu</h1>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="order.html">Order Cart</a>
+</nav>
 
-<ul style="font-size:18px;">
-  <li>Biryani – $12</li>
-  <li>Butter Chicken – $14</li>
-  <li>Paneer Tikka – $11</li>
-  <li>Dal Makhani – $10</li>
-  <li>Naan / Roti – $3</li>
-</ul>
+<section class="menu">
+  <h2>Our Menu</h2>
 
-<p style="text-align:center;"><a href="index.html">⬅ Back to Home</a></p>
+  <div class="item">
+    <span>Butter Chicken - $12</span>
+    <button onclick="addItem('Butter Chicken')">Add</button>
+  </div>
+
+  <div class="item">
+    <span>Paneer Tikka - $10</span>
+    <button onclick="addItem('Paneer Tikka')">Add</button>
+  </div>
+
+  <div class="item">
+    <span>Dal Makhani - $8</span>
+    <button onclick="addItem('Dal Makhani')">Add</button>
+  </div>
+
+  <div class="item">
+    <span>Roti (2 pcs) - $2</span>
+    <button onclick="addItem('Roti')">Add</button>
+  </div>
+
+  <a class="btn" href="order.html">🛒 Go to Cart</a>
+</section>
+
+<footer>
+  © 2026 The Rajputana Darbar. All Rights Reserved.
+</footer>
 
 </body>
 </html>
