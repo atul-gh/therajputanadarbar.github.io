@@ -6,8 +6,39 @@
     body { font-family: Arial; margin:0; background:#fff8f0; }
     nav { background:#c0392b; padding:15px; text-align:center; }
     nav a { color:white; margin:15px; text-decoration:none; font-size:18px; }
+
     header { padding:60px; text-align:center; }
     h1 { color:#c0392b; }
+
+    .order-btn {
+      display:inline-block;
+      margin-top:20px;
+      padding:15px 30px;
+      background:#27ae60;
+      color:white;
+      font-size:20px;
+      text-decoration:none;
+      border-radius:5px;
+    }
+
+    .order-btn:hover {
+      background:#219150;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#25D366;
+      color:white;
+      padding:15px 20px;
+      border-radius:50px;
+      text-decoration:none;
+      font-size:18px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.3);
+    }
+
     footer { background:#333; color:white; text-align:center; padding:10px; }
   </style>
 </head>
@@ -21,10 +52,22 @@
 </nav>
 
 <header>
-  <h1>Welcome to Khana</h1>
+  <h1>Welcome to The Rajputana Darbar</h1>
   <p>Delicious food made with love ❤️</p>
   <p>Fresh • Authentic • Affordable</p>
+
+  <!-- Online Order Button -->
+  <a class="order-btn" href="https://wa.me/+916388442976?text=Hello%20The Rajputana Darbar,%20I%20want%20to%20place%20an%20order">
+    🍽️ Order Online
+  </a>
 </header>
+
+<!-- WhatsApp Floating Button -->
+<a class="whatsapp" 
+   href="https://wa.me/+916388442976?text=Hello%20The Rajputana Darbar,%20I%20want%20to%20place%20an%20order"
+   target="_blank">
+   💬 WhatsApp
+</a>
 
 <footer>
   © 2026 Khana. All Rights Reserved.
