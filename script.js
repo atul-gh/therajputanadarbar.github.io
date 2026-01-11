@@ -72,7 +72,7 @@ Phone: ${phone}
 ${orderText()}`;
 
   window.open(
-    `https://wa.me/1XXXXXXXXXX?text=${encodeURIComponent(message)}`,
+    `https://wa.me/+916388442976?text=${encodeURIComponent(message)}`,
     "_blank"
   );
 }
@@ -95,6 +95,6 @@ Phone: ${phone}
 ${orderText()}`;
 
   window.location.href =
-    `mailto:YOUR_EMAIL@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    `mailto:drajputanadarbar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
