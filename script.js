@@ -1,24 +1,32 @@
-// Cart Object
-let cart = {};
+// Initialize cart from localStorage
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-// Add item
+// Save cart to localStorage
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Add item to cart
 function addItem(item) {
   cart[item] = (cart[item] || 0) + 1;
+  saveCart();
   renderCart();
 }
 
-// Increase / Decrease Quantity
+// Increase / decrease quantity
 function increase(item) {
   cart[item]++;
+  saveCart();
   renderCart();
 }
 function decrease(item) {
   cart[item]--;
   if (cart[item] <= 0) delete cart[item];
+  saveCart();
   renderCart();
 }
 
-// Render cart items
+// Render cart on Cart page
 function renderCart() {
   const container = document.getElementById("cartItems");
   if (!container) return;
@@ -44,7 +52,7 @@ function renderCart() {
   container.innerHTML = html;
 }
 
-// Get order text
+// Get order text for WhatsApp/Email
 function orderText() {
   let text = "Order Details:\n";
   for (let item in cart) {
@@ -98,3 +106,7 @@ ${orderText()}`;
     `mailto:drajputanadarbar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+// Render cart automatically on load
+document.addEventListener("DOMContentLoaded", () => {
+  renderCart();
+});
