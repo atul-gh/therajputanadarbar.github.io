@@ -44,6 +44,13 @@ function formatRupees(amount) {
   return `₹${amount}`;
 }
 
+// Function to clear cart
+function clearCart() {
+  cart = {};
+  saveCart();
+  renderCart();
+}
+
 // Render cart on Cart page
 function renderCart() {
   const container = document.getElementById("cartItems");
@@ -117,6 +124,9 @@ ${orderText()}`;
     `https://wa.me/916388442976?text=${encodeURIComponent(message)}`,
     "_blank"
   );
+  
+  // Clear cart after sending
+  clearCart();
 }
 
 // Send order via Email
