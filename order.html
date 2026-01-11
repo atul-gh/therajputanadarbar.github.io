@@ -23,14 +23,23 @@
 <h1 style="text-align:center;color:#8e2a2a;">Place Your Order</h1>
 
 <form action="https://formsubmit.co/drajputanadarbar@gmail.com" method="POST">
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="tel" name="phone" placeholder="Phone Number" required>
-  <textarea name="order" placeholder="Your Order Details" required></textarea>
 
-  <input type="hidden" name="_subject" value="New Order - The Rajputana Darbar">
+  <input type="text" name="name" placeholder="Your Name" required>
+
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+
+  <!-- Order Name -->
+  <input type="text" name="order_name" placeholder="Order Name (e.g. Butter Chicken Combo)" required>
+
+  <textarea name="order_details" placeholder="Order Details (Quantity, spice level, notes)" required></textarea>
+
+  <!-- Dynamic Subject Line -->
+  <input type="hidden" name="_subject" value="New Order – %order_name% | The Rajputana Darbar">
+
   <input type="hidden" name="_captcha" value="false">
 
   <button type="submit">Submit Order</button>
+
 </form>
 
 <p style="text-align:center;"><a href="index.html">⬅ Back to Home</a></p>
