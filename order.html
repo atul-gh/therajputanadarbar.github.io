@@ -3,49 +3,180 @@
 <head>
   <title>Order | The Rajputana Darbar</title>
   <style>
-    body { font-family:Arial; background:#fff8f0; }
-    form { max-width:420px; margin:auto; }
-    input, textarea, button {
-      width:100%;
-      padding:10px;
+    body { font-family:Arial; background:#fff8f0; padding:20px; }
+    h1 { color:#8e2a2a; text-align:center; }
+
+    .menu, .cart {
+      max-width:500px;
+      margin:20px auto;
+      background:white;
+      padding:20px;
+      border-radius:8px;
+    }
+
+    .item, .cart-item {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
       margin:10px 0;
     }
+
     button {
       background:#8e2a2a;
       color:white;
       border:none;
-      font-size:16px;
+      padding:6px 10px;
       cursor:pointer;
+      border-radius:4px;
+    }
+
+    .qty-btn {
+      width:32px;
+      height:32px;
+      font-size:18px;
+    }
+
+    .place {
+      width:100%;
+      margin-top:10px;
+      font-size:16px;
+      padding:10px;
+    }
+
+    input {
+      width:100%;
+      padding:8px;
+      margin:6px 0;
     }
   </style>
 </head>
 <body>
 
-<h1 style="text-align:center;color:#8e2a2a;">Place Your Order</h1>
+<h1>🧾 Place Your Order</h1>
 
-<form action="https://formsubmit.co/YOUR_EMAIL@gmail.com" method="POST">
+<div class="menu">
+  <h3>🍽️ Menu</h3>
 
-  <!-- Static Subject -->
-  <input type="hidden" name="_subject" value="New Order | The Rajputana Darbar">
+  <div class="item">
+    <span>Butter Chicken</span>
+    <button onclick="addItem('Butter Chicken')">Add</button>
+  </div>
 
-  <!-- Better email formatting -->
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_captcha" value="false">
+  <div class="item">
+    <span>Paneer Tikka</span>
+    <button onclick="addItem('Paneer Tikka')">Add</button>
+  </div>
 
-  <input type="text" name="Customer Name" placeholder="Your Name" required>
+  <div class="item">
+    <span>Dal Makhani</span>
+    <button onclick="addItem('Dal Makhani')">Add</button>
+  </div>
+</div>
 
-  <input type="tel" name="Phone Number" placeholder="Phone Number" required>
+<div class="cart">
+  <h3>🛒 Cart</h3>
+  <div id="cartItems">Cart is empty</div>
 
-  <!-- Order Name (appears clearly in email body) -->
-  <input type="text" name="ORDER NAME ⭐" placeholder="Order Name (e.g. Butter Chicken Combo)" required>
+  <input id="name" placeholder="Customer Name" required>
+  <input id="phone" placeholder="Phone Number" required>
 
-  <textarea name="Order Details" placeholder="Quantity, spice level, special notes" required></textarea>
+  <button class="place" onclick="sendWhatsApp()">📲 Order via WhatsApp</button>
+  <button class="place" onclick="sendEmail()">📧 Order via Email</button>
+</div>
 
-  <button type="submit">Submit Order</button>
+<script>
+let cart = {};
 
-</form>
+function addItem(item) {
+  cart[item] = (cart[item] || 0) + 1;
+  renderCart();
+}
 
-<p style="text-align:center;"><a href="index.html">⬅ Back to Home</a></p>
+function increase(item) {
+  cart[item]++;
+  renderCart();
+}
+
+function decrease(item) {
+  cart[item]--;
+  if (cart[item] <= 0) delete cart[item];
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById("cartItems");
+  if (Object.keys(cart).length === 0) {
+    container.innerHTML = "Cart is empty";
+    return;
+  }
+
+  let html = "";
+  for (let item in cart) {
+    html += `
+      <div class="cart-item">
+        <span>${item}</span>
+        <div>
+          <button class="qty-btn" onclick="decrease('${item}')">−</button>
+          <strong>${cart[item]}</strong>
+          <button class="qty-btn" onclick="increase('${item}')">+</button>
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+function orderText() {
+  let text = "Order Details:\n";
+  for (let item in cart) {
+    text += `${item} x ${cart[item]}\n`;
+  }
+  return text;
+}
+
+function sendWhatsApp() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+
+  if (!name || !phone || Object.keys(cart).length === 0) {
+    alert("Please add items and fill customer details");
+    return;
+  }
+
+  const message =
+`New Order – The Rajputana Darbar
+
+Customer: ${name}
+Phone: ${phone}
+
+${orderText()}`;
+
+  window.open(
+    `https://wa.me/+916388442976?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+}
+
+function sendEmail() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+
+  if (!name || !phone || Object.keys(cart).length === 0) {
+    alert("Please add items and fill customer details");
+    return;
+  }
+
+  const subject = "New Order | The Rajputana Darbar";
+  const body =
+`Customer: ${name}
+Phone: ${phone}
+
+${orderText()}`;
+
+  window.location.href =
+    `mailto:drajputanadarbar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+</script>
 
 </body>
 </html>
