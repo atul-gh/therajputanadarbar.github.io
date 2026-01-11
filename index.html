@@ -7,37 +7,23 @@
     nav { background:#8e2a2a; padding:15px; text-align:center; }
     nav a { color:white; margin:15px; text-decoration:none; font-size:18px; }
 
-    header { padding:60px; text-align:center; }
+    header { padding:50px; text-align:center; }
     h1 { color:#8e2a2a; }
 
-    .order-btn {
+    .btn {
       display:inline-block;
-      margin-top:20px;
+      margin:10px;
       padding:15px 30px;
       background:#27ae60;
       color:white;
-      font-size:20px;
+      font-size:18px;
       text-decoration:none;
       border-radius:5px;
     }
 
-    .order-btn:hover {
-      background:#219150;
-    }
+    section { padding:40px; text-align:center; }
 
-    /* WhatsApp Button */
-    .whatsapp {
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:#25D366;
-      color:white;
-      padding:15px 20px;
-      border-radius:50px;
-      text-decoration:none;
-      font-size:18px;
-      box-shadow:0 2px 5px rgba(0,0,0,0.3);
-    }
+    iframe { width:90%; height:300px; border:0; }
 
     footer { background:#333; color:white; text-align:center; padding:10px; }
   </style>
@@ -54,21 +40,27 @@
 <header>
   <h1>Welcome to The Rajputana Darbar</h1>
   <p>Royal taste • Authentic flavors 👑</p>
-  <p>Experience the pride of Rajputana cuisine</p>
 
-  <!-- Online Order Button -->
-  <a class="order-btn" 
-     href="https://wa.me/+916388442976?text=Hello%20The%20Rajputana%20Darbar,%20I%20want%20to%20place%20an%20order">
-    🍽️ Order Online
-  </a>
+  <a class="btn" href="order.html">🧾 Order Now</a>
+  <a class="btn" href="menu.html">📋 View Menu</a>
 </header>
 
-<!-- WhatsApp Floating Button -->
-<a class="whatsapp" 
-   href="https://wa.me/+916388442976?text=Hello%20The%20Rajputana%20Darbar,%20I%20want%20to%20place%20an%20order"
-   target="_blank">
-   💬 WhatsApp
-</a>
+<!-- Google Map -->
+<section>
+  <h2>📍 Find Us</h2>
+  <iframe 
+    src="https://www.google.com/maps?q=Charlotte%20NC&output=embed">
+  </iframe>
+</section>
+
+<!-- QR Code -->
+<section>
+  <h2>🔲 Scan for Menu & Ordering</h2>
+  <img 
+    src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourusername.github.io"
+    alt="QR Code">
+  <p>Scan to view menu & place order</p>
+</section>
 
 <footer>
   © 2026 The Rajputana Darbar. All Rights Reserved.
