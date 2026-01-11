@@ -1,14 +1,14 @@
-// Menu items with price & category
+// Menu items with price (in ₹) & category
 const menuData = {
-  "Paneer Tikka": {price: 10, category: "Starter Veg"},
-  "Veg Spring Roll": {price: 8, category: "Starter Veg"},
-  "Chicken Tikka": {price: 12, category: "Starter Non-Veg"},
-  "Fish Amritsari": {price: 14, category: "Starter Non-Veg"},
-  "Dal Makhani": {price: 8, category: "Main Course Veg"},
-  "Paneer Butter Masala": {price: 12, category: "Main Course Veg"},
-  "Butter Chicken": {price: 12, category: "Main Course Non-Veg"},
-  "Mutton Rogan Josh": {price: 15, category: "Main Course Non-Veg"},
-  "Roti": {price: 2, category: "Main Course Veg"} // example
+  "Paneer Tikka": {price: 300, category: "Starter Veg"},
+  "Veg Spring Roll": {price: 200, category: "Starter Veg"},
+  "Chicken Tikka": {price: 350, category: "Starter Non-Veg"},
+  "Fish Amritsari": {price: 400, category: "Starter Non-Veg"},
+  "Dal Makhani": {price: 250, category: "Main Course Veg"},
+  "Paneer Butter Masala": {price: 300, category: "Main Course Veg"},
+  "Butter Chicken": {price: 350, category: "Main Course Non-Veg"},
+  "Mutton Rogan Josh": {price: 450, category: "Main Course Non-Veg"},
+  "Roti": {price: 20, category: "Main Course Veg"} // example
 };
 
 // Initialize cart from localStorage
@@ -39,6 +39,11 @@ function decrease(item) {
   renderCart();
 }
 
+// Format number as ₹
+function formatRupees(amount) {
+  return `₹${amount}`;
+}
+
 // Render cart on Cart page
 function renderCart() {
   const container = document.getElementById("cartItems");
@@ -60,18 +65,18 @@ function renderCart() {
 
     html += `
       <div class="cart-item">
-        <span>${item} (${category}) - $${price}</span>
+        <span>${item} (${category}) - ${formatRupees(price)}</span>
         <div>
           <button class="qty-btn" onclick="decrease('${item}')">−</button>
           <strong>${cart[item]}</strong>
           <button class="qty-btn" onclick="increase('${item}')">+</button>
         </div>
-        <span>=$${itemTotal}</span>
+        <span>= ${formatRupees(itemTotal)}</span>
       </div>
     `;
   }
 
-  html += `<hr><h3>Total: $${total}</h3>`;
+  html += `<hr><h3>Total: ${formatRupees(total)}</h3>`;
   container.innerHTML = html;
 }
 
@@ -84,9 +89,9 @@ function orderText() {
     const category = menuData[item]?.category || "";
     const itemTotal = price * cart[item];
     total += itemTotal;
-    text += `${item} (${category}) x ${cart[item]} = $${itemTotal}\n`;
+    text += `${item} (${category}) x ${cart[item]} = ${formatRupees(itemTotal)}\n`;
   }
-  text += `\nTotal: $${total}`;
+  text += `\nTotal: ${formatRupees(total)}`;
   return text;
 }
 
@@ -109,7 +114,7 @@ Phone: ${phone}
 ${orderText()}`;
 
   window.open(
-    `https://wa.me/+916388442976?text=${encodeURIComponent(message)}`,
+    `https://wa.me/916388442976?text=${encodeURIComponent(message)}`,
     "_blank"
   );
 }
