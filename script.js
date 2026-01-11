@@ -1,4 +1,4 @@
-// Menu items with price (in ₹) & category
+// Menu items with price (₹) & category
 const menuData = {
   "Paneer Tikka": {price: 300, category: "Starter Veg"},
   "Veg Spring Roll": {price: 200, category: "Starter Veg"},
@@ -8,7 +8,7 @@ const menuData = {
   "Paneer Butter Masala": {price: 300, category: "Main Course Veg"},
   "Butter Chicken": {price: 350, category: "Main Course Non-Veg"},
   "Mutton Rogan Josh": {price: 450, category: "Main Course Non-Veg"},
-  "Roti": {price: 20, category: "Main Course Veg"} // example
+  "Roti": {price: 20, category: "Main Course Veg"}
 };
 
 // Initialize cart from localStorage
@@ -32,6 +32,7 @@ function increase(item) {
   saveCart();
   renderCart();
 }
+
 function decrease(item) {
   cart[item]--;
   if (cart[item] <= 0) delete cart[item];
@@ -44,14 +45,7 @@ function formatRupees(amount) {
   return `₹${amount}`;
 }
 
-// Function to clear cart
-function clearCart() {
-  cart = {};
-  saveCart();
-  renderCart();
-}
-
-// Render cart on Cart page
+// Render cart on order page
 function renderCart() {
   const container = document.getElementById("cartItems");
   if (!container) return;
@@ -87,7 +81,7 @@ function renderCart() {
   container.innerHTML = html;
 }
 
-// Get order text with total for WhatsApp/Email
+// Generate order text for WhatsApp / Email
 function orderText() {
   let text = "Order Details:\n";
   let total = 0;
@@ -102,10 +96,17 @@ function orderText() {
   return text;
 }
 
+// Clear cart after order
+function clearCart() {
+  cart = {};
+  saveCart();
+  renderCart();
+}
+
 // Send order via WhatsApp
 function sendWhatsApp() {
-  const name = document.getElementById("name")?.value;
-  const phone = document.getElementById("phone")?.value;
+  const name = document.getElementById("name")?.value.trim();
+  const phone = document.getElementById("phone")?.value.trim();
 
   if (!name || !phone || Object.keys(cart).length === 0) {
     alert("Please add items and fill customer details");
@@ -124,15 +125,15 @@ ${orderText()}`;
     `https://wa.me/916388442976?text=${encodeURIComponent(message)}`,
     "_blank"
   );
-  
+
   // Clear cart after sending
   clearCart();
 }
 
 // Send order via Email
 function sendEmail() {
-  const name = document.getElementById("name")?.value;
-  const phone = document.getElementById("phone")?.value;
+  const name = document.getElementById("name")?.value.trim();
+  const phone = document.getElementById("phone")?.value.trim();
 
   if (!name || !phone || Object.keys(cart).length === 0) {
     alert("Please add items and fill customer details");
@@ -148,9 +149,12 @@ ${orderText()}`;
 
   window.location.href =
     `mailto:drajputanadarbar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  // Clear cart after sending
+  clearCart();
 }
 
-// Render cart automatically on load
+// Auto-render cart on page load
 document.addEventListener("DOMContentLoaded", () => {
   renderCart();
 });
