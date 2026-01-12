@@ -17,27 +17,31 @@ let cart = JSON.parse(localStorage.getItem("cart")) || {};
 // Save cart to localStorage
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
+  updateMenuQuantities();
+  renderCart(); // also update cart page
 }
 
-// Add item to cart
-function addItem(item) {
+// Add or remove item
+function increase(item) {
   cart[item] = (cart[item] || 0) + 1;
   saveCart();
-  renderCart();
-}
-
-// Increase / decrease quantity
-function increase(item) {
-  cart[item]++;
-  saveCart();
-  renderCart();
 }
 
 function decrease(item) {
+  if (!cart[item]) return;
   cart[item]--;
   if (cart[item] <= 0) delete cart[item];
   saveCart();
-  renderCart();
+}
+
+// Update menu page quantities
+function updateMenuQuantities() {
+  for (let item in menuData) {
+    const qtySpan = document.getElementById(`qty-${item}`);
+    if (qtySpan) {
+      qtySpan.textContent = cart[item] || 0;
+    }
+  }
 }
 
 // Format number as ₹
@@ -57,10 +61,9 @@ function renderCart() {
 
   let html = "";
   let total = 0;
-
   for (let item in cart) {
-    const price = menuData[item]?.price || 0;
-    const category = menuData[item]?.category || "";
+    const price = menuData[item].price;
+    const category = menuData[item].category;
     const itemTotal = price * cart[item];
     total += itemTotal;
 
@@ -68,26 +71,25 @@ function renderCart() {
       <div class="cart-item">
         <span>${item} (${category}) - ${formatRupees(price)}</span>
         <div>
-          <button class="qty-btn" onclick="decrease('${item}')">−</button>
+          <button onclick="decrease('${item}')">−</button>
           <strong>${cart[item]}</strong>
-          <button class="qty-btn" onclick="increase('${item}')">+</button>
+          <button onclick="increase('${item}')">+</button>
         </div>
         <span>= ${formatRupees(itemTotal)}</span>
       </div>
     `;
   }
-
   html += `<hr><h3>Total: ${formatRupees(total)}</h3>`;
   container.innerHTML = html;
 }
 
-// Generate order text for WhatsApp / Email
+// Generate order text
 function orderText() {
   let text = "Order Details:\n";
   let total = 0;
   for (let item in cart) {
-    const price = menuData[item]?.price || 0;
-    const category = menuData[item]?.category || "";
+    const price = menuData[item].price;
+    const category = menuData[item].category;
     const itemTotal = price * cart[item];
     total += itemTotal;
     text += `${item} (${category}) x ${cart[item]} = ${formatRupees(itemTotal)}\n`;
@@ -96,14 +98,13 @@ function orderText() {
   return text;
 }
 
-// Clear cart after order
+// Clear cart
 function clearCart() {
   cart = {};
   saveCart();
-  renderCart();
 }
 
-// Send order via WhatsApp
+// WhatsApp order
 function sendWhatsApp() {
   const name = document.getElementById("name")?.value.trim();
   const phone = document.getElementById("phone")?.value.trim();
@@ -126,11 +127,10 @@ ${orderText()}`;
     "_blank"
   );
 
-  // Clear cart after sending
   clearCart();
 }
 
-// Send order via Email
+// Email order
 function sendEmail() {
   const name = document.getElementById("name")?.value.trim();
   const phone = document.getElementById("phone")?.value.trim();
@@ -148,13 +148,13 @@ Phone: ${phone}
 ${orderText()}`;
 
   window.location.href =
-    `mailto:drajputanadarbar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    `mailto:YOUR_EMAIL@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-  // Clear cart after sending
   clearCart();
 }
 
-// Auto-render cart on page load
+// On page load
 document.addEventListener("DOMContentLoaded", () => {
-  renderCart();
+  updateMenuQuantities(); // menu quantities sync
+  renderCart();           // render cart if on cart page
 });
