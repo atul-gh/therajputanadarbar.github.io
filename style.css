@@ -79,6 +79,8 @@ nav {
 .nav-logo {
   height: 40px;
   width: auto;
+  display: block;  /*Removes extra whitespace below the image*/
+  transition: transform 0.3s ease;
 }
 
 /* --- Floating Cart Fix --- */
