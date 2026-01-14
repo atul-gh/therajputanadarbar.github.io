@@ -29,7 +29,8 @@ nav {
   align-items: center;
   max-width: 1000px;
   margin: auto;
-  padding: 0 15px;
+/*padding: 0 15px; */
+  padding: 10px 15px; // Added 10px top/bottom padding for breathing room //
 }
 
 .nav-container a {
