@@ -1,34 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>The Rajputana Darbar | Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | The Rajputana Darbar</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
+  
 <body>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="menu.html">Menu</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="order.html">Order Cart</a>
+  <div class="nav-container">
+    <a href="index.html"><img src="logo.png" alt="Logo" class="nav-logo"></a>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="order.html">Cart</a>
+      <a href="order.html" class="floating-cart-middle hidden" id="floatingCart">
+        🛒 <span id="cartTotal">₹0</span>
+      </a>
+  </div>
 </nav>
 
-<header>
-  <h1>Welcome to The Rajputana Darbar</h1>
-  <p>Royal taste • Authentic flavors 👑</p>
-  <a class="btn" href="order.html">🛒 Place Order</a>
-</header>
+  <main class="content-wrapper">
+    <section style="text-align: center; margin-top: 40px;">
+      <h2>Welcome to The Rajputana Darbar</h2>
+      <p>Authentic Indian Royal Cuisine</p>
+    </section>
+      
+    <section class="qr-section">
+      <h2>Scan Menu</h2>
+      <p>Scan the QR code to view our menu & place your order</p>
 
-<section class="qr-section">
-  <h2>🔲 Scan to Order</h2>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://TheRJPD.github.io/order.html" alt="QR Code">
-  <p>Scan this QR code to order instantly!</p>
-</section>
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://therjpd.github.io/online/menu.html"
+        alt="Menu QR Code"
+        class="menu-qr"
+      />
+    </section>
+  </main>
 
-<footer>
-  © 2026 The Rajputana Darbar. All Rights Reserved.
-</footer>
+  <footer>
+    © 2026 The Rajputana Darbar. All Rights Reserved.
+  </footer>
 
 </body>
 </html>

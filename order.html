@@ -1,34 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Order Cart | The Rajputana Darbar</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Your Order | The Rajputana Darbar</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="menu.html">Menu</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="order.html">Order Cart</a>
-</nav>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html"><img src="logo.png" alt="Logo" class="nav-logo" style="height: 40px;"></a>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
 
-<section class="cart">
-  <h2>🛒 Your Cart</h2>
-  <div id="cartItems">Cart is empty</div>
+  <main class="content-wrapper">
+    <section class="order-section">
+      <h2 style="text-align: center;">Your Royal Feast</h2>
+      <p style="text-align: center; margin-bottom: 30px;">Review your items and provide delivery details.</p>
 
-  <input id="name" placeholder="Customer Name" required>
-  <input id="phone" placeholder="Phone Number" required>
+      <div id="cartItems" class="cart-container">
+        <p style="text-align: center; padding: 20px;">Your cart is currently empty.</p>
+      </div>
 
-  <button class="place" onclick="sendWhatsApp()">📲 Order via WhatsApp</button>
-  <!-- <button class="place" onclick="sendEmail()">📧 Order via Email</button> -->
-</section>
+      <hr style="border: 1px solid var(--royal-gold); margin: 30px 0;">
 
-<footer>
-  © 2026 The Rajputana Darbar. All Rights Reserved.
-</footer>
+      <div class="order-form">
+        <h3 style="color: var(--royal-maroon);">Delivery Details</h3>
+        
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter your 10-digit mobile number" required>
+
+        <label for="address">Delivery Address</label>
+        <textarea id="address" rows="3" placeholder="Enter your full address with landmarks" required></textarea>
+
+        <button type="button" class="btn-order" onclick="sendWhatsApp()">
+          Confirm Order via WhatsApp
+        </button>
+        
+        <p style="font-size: 0.8rem; text-align: center; margin-top: 10px; color: #666;">
+          *Clicking confirm will open WhatsApp to send your order details.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer style="margin-top: 50px;">
+    © 2026 The Rajputana Darbar. All Rights Reserved.
+  </footer>
 
 </body>
 </html>
